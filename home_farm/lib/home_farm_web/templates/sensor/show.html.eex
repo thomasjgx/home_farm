@@ -13,7 +13,12 @@
         </tr>
       </thead>
       <tbody>
-        
+        <%= for sensor_value <- @sensor_values do %>
+          <tr>
+            <td><%= sensor_value.time %></td>
+            <td><%= sensor_value.reading %></td>
+          </tr>
+        <% end %>
       </tbody>
     </table>
   </div>

@@ -10,13 +10,19 @@
     <%= text_input f, :name, class: "form-control" %>
     <%= error_tag f, :name %>
   </div>
-  
+
+  <%= label f, :description %>
+  <div class="form-group">
+    <%= textarea f, :description, class: "form-control" %>
+    <%= error_tag f, :description %>
+  </div>
+
   <%= label f, :key %>
   <div class="form-group">
     <%= text_input f, :key, class: "form-control" %>
     <%= error_tag f, :key %>
   </div>
-  
+
   <%= label f, :type %>
   <div class="form-group">
     <%= select f, :type, [
@@ -28,18 +34,12 @@
     <%= error_tag f, :type %>
   </div>
 
-  <%= label f, :description %>
+  <%= label f, :reading_source_id, "Reading Source" %>
   <div class="form-group">
-    <%= textarea f, :description, class: "form-control" %>
-    <%= error_tag f, :description %>
+    <%= select f, :reading_source_id, @reading_sources, class: "form-control" %>
+    <%= error_tag f, :reading_source_id %>
   </div>
 
-  <%= label f, :ip_address, "IP Address" %>
-  <div class="form-group">
-    <%= text_input f, :ip_address, class: "form-control" %>
-    <%= error_tag f, :ip_address %>
-  </div>
-  
   <div class="form-group">
     <button type="submit" class="btn btn-primary">Save</button>
   </div>

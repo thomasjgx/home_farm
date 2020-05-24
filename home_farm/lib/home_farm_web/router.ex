@@ -18,6 +18,7 @@ defmodule HomeFarmWeb.Router do
 
     get "/", PageController, :index
 
+    resources "/reading-sources", ReadingSourceController
     resources "/sensors", SensorController
   end
 

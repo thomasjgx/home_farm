@@ -1,0 +1,32 @@
+<div class="card">
+  <div class="card-header">
+    <h5 class="mt-1">
+      <%= @reading_source.name %>
+      <a href="<%= Routes.reading_source_path(@conn, :index) %>" class="float-right btn btn-primary btn-sm">Back</a>
+    </h5>
+  </div>
+  <div class="card-body">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>#</th><th>Sensor</th><th>Type</th><th>Key</th><th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= for sensor <- @sensors do %>
+          <tr>
+            <td><%= sensor.id %></td>
+            <td><%= sensor.name %></td>
+            <td><%= sensor.type %></td>
+            <td><%= sensor.key %></td>
+            <td>
+              <a class="btn btn-info btn-sm" href="<%= Routes.sensor_path(@conn, :show, sensor) %>">Show</a>
+              <a class="btn btn-primary btn-sm" href="<%= Routes.sensor_path(@conn, :edit, sensor) %>">Edit</a>
+              <%= link "Delete", to: Routes.sensor_path(@conn, :delete, sensor), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-sm" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

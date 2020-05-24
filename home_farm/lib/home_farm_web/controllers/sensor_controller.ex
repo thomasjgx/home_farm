@@ -1,7 +1,7 @@
 defmodule HomeFarmWeb.SensorController do
   use HomeFarmWeb, :controller
 
-  alias HomeFarm.{Sensors, Sensors.Sensor}
+  alias HomeFarm.{Sensors, Sensors.Sensor, ReadingSources}
 
   def index(conn, _params) do
     sensors = Sensors.get_all
@@ -10,7 +10,8 @@ defmodule HomeFarmWeb.SensorController do
 
   def new(conn, _) do
     changeset = Sensor.changeset(%Sensor{}, %{})
-    render(conn, "new.html", changeset: changeset)
+    reading_sources = get_reading_sources_map()
+    render(conn, "new.html", changeset: changeset, reading_sources: reading_sources)
   end
 
   def create(conn, %{"sensor" => params}) do
@@ -19,14 +20,16 @@ defmodule HomeFarmWeb.SensorController do
         conn
         |> redirect(to: Routes.sensor_path(conn, :index))
       {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        reading_sources = get_reading_sources_map()
+        render(conn, "new.html", changeset: changeset, reading_sources: reading_sources)
     end
   end
 
   def edit(conn, %{"id" => id}) do
     sensor = Sensors.get_sensor!(id)
     changeset = Sensor.changeset(sensor, %{})
-    render(conn, "edit.html", sensor: sensor, changeset: changeset)
+    reading_sources = get_reading_sources_map()
+    render(conn, "edit.html", sensor: sensor, changeset: changeset, reading_sources: reading_sources)
   end
 
   def update(conn, %{"id" => id, "sensor" => params}) do
@@ -36,12 +39,21 @@ defmodule HomeFarmWeb.SensorController do
         conn
         |> redirect(to: Routes.sensor_path(conn, :index))
       {:error, changeset} ->
-        render(conn, "edit.html", sensor: sensor, changeset: changeset)
+        reading_sources = get_reading_sources_map()
+        render(conn, "edit.html", sensor: sensor, changeset: changeset, reading_sources: reading_sources)
     end
   end
 
   def show(conn, %{"id" => id}) do
     sensor = Sensors.get_sensor!(id)
-    render(conn, "show.html", sensor: sensor)
+    sensor_values = Sensors.get_readings_by_sensor(sensor)
+    render(conn, "show.html", sensor: sensor, sensor_values: sensor_values)
+  end
+
+  defp get_reading_sources_map() do
+    ReadingSources.get_all
+    |> Enum.map(fn reading_source ->
+      [key: reading_source.name, value: reading_source.id]
+    end)
   end
 end

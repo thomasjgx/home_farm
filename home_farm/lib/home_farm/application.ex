@@ -14,7 +14,9 @@ defmodule HomeFarm.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: HomeFarm.PubSub},
       # Start the Endpoint (http/https)
-      HomeFarmWeb.Endpoint
+      HomeFarmWeb.Endpoint,
+      # Start the service for fetching readings from sensors
+      HomeFarm.GetReadings,
       # Start a worker by calling: HomeFarm.Worker.start_link(arg)
       # {HomeFarm.Worker, arg}
     ]

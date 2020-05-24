@@ -11,15 +11,15 @@ defmodule HomeFarm.Sensors.Sensor do
     field :key, :string
     field :type, :string
     field :description, :string
-    field :ip_address, :string
+    belongs_to :reading_source, HomeFarm.ReadingSources.ReadingSource
 
     timestamps()
   end
 
   def changeset(sensor, attrs) do
     sensor
-    |> cast(attrs, [:name, :key, :type, :description, :ip_address])
-    |> validate_required([:name, :key, :type, :ip_address])
+    |> cast(attrs, [:name, :key, :type, :description, :reading_source_id])
+    |> validate_required([:name, :key, :type, :reading_source_id])
   end
 
   def create(struct \\ %__MODULE__{}, params) do

@@ -4,12 +4,20 @@ defmodule HomeFarm.Repo.Migrations.CreateSensorTables do
   def change do
     execute "CREATE EXTENSION IF NOT EXISTS timescaledb", "SELECT 1"
 
+    create table(:reading_sources) do
+      add :name, :string, null: false
+      add :description, :string
+      add :ip_address, :string, null: false
+
+      timestamps()
+    end
+
     create table(:sensors) do
       add :name, :string, null: false
       add :key, :string, null: false
       add :type, :string, null: false
       add :description, :string
-      add :ip_address, :string, null: false
+      add :reading_source_id, references(:reading_sources), null: false
 
       timestamps()
     end

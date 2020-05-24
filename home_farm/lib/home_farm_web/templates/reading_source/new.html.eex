@@ -1,0 +1,11 @@
+<div class="card">
+  <div class="card-header">
+    <h5 class="mt-1">
+      Add new reading source
+      <a href="<%= Routes.reading_source_path(@conn, :index) %>" class="float-right btn btn-primary btn-sm">Back</a>
+    </h5>
+  </div>
+  <div class="card-body">
+    <%= render "form.html", Map.put(assigns, :action, Routes.reading_source_path(@conn, :create)) %>
+  </div>
+</div>

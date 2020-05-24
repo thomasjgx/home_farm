@@ -1,0 +1,32 @@
+<div class="card">
+  <div class="card-header">
+    <h5 class="mt-1">Reading Sources
+      <a href="<%= Routes.reading_source_path(@conn, :new)  %>" class="float-right btn btn-sm btn-primary">
+        Add New
+      </a>
+    </h5>
+  </div>
+  <div class="card-body">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>#</th><th>Name</th><th>IP Address</th><th></th>
+        </th>
+      </thead>
+      <tbody>
+        <%= for reading_source <- @reading_sources do  %>
+          <tr>
+            <td><%= reading_source.id %></td>
+            <td><%= reading_source.name  %></td>
+            <td><%= reading_source.ip_address  %></td>
+            <td>
+              <a class="btn btn-info btn-sm" href="<%= Routes.reading_source_path(@conn, :show, reading_source) %>">Show</a>
+              <a class="btn btn-primary btn-sm" href="<%= Routes.reading_source_path(@conn, :edit, reading_source) %>">Edit</a>
+              <%= link "Delete", to: Routes.reading_source_path(@conn, :delete, reading_source), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-sm" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

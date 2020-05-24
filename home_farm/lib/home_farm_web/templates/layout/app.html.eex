@@ -38,6 +38,9 @@
               <a class="nav-link" href="<%= Routes.page_path(@conn, :index) %>">Dashboard</a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="<%= Routes.reading_source_path(@conn, :index) %>">Reading Sources</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="<%= Routes.sensor_path(@conn, :index) %>">Sensors</a>
             </li>
           </ul>
