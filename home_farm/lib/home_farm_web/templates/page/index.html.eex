@@ -2,15 +2,6 @@
   <h1><%= gettext "Welcome to %{name}!", name: "HomeFarm" %></h1>
   <p>Peace-of-mind from seedlings to healthy plants</p>
   <br>
-  <%=for sensor <- @sensors do %>
-    <div class="card mb-3" style="min-height: 400px;">
-      <div class="card-header">
-        <h5 class="mt-1"><%= sensor.name %></h5>
-      </div>
-      <div class="card-body">
-        -
-      </div>
-    </div>
-  <% end %>
+  <div id="widget"></div>
 </section>
 

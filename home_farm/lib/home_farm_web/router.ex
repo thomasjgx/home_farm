@@ -25,6 +25,8 @@ defmodule HomeFarmWeb.Router do
   # Other scopes may use custom stacks.
   scope "/api", HomeFarmWeb do
     pipe_through :api
+
+    get "/sensors", PageController, :api_get_sensors
   end
 
   # Enables LiveDashboard only for development

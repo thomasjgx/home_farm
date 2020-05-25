@@ -53,6 +53,7 @@
         <%= @inner_content %>
       </div>
     </main>
-
+  
+    <%= render_existing @view_module, ~s(#{Path.basename(@view_template, ".html")}_scripts.html), assigns %>
   </body>
 </html>

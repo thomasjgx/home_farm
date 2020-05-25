@@ -5,6 +5,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const webpack = require('webpack');
+const { VueLoaderPlugin } = require('vue-loader');
 
 module.exports = (env, options) => {
   const devMode = options.mode !== 'production';
@@ -51,6 +52,11 @@ module.exports = (env, options) => {
               outputPath: '../fonts'
             }
           }]
+        },
+        {
+          test: /\.vue$/,
+          exclude: /node_modules/,
+          loader: 'vue-loader'
         }
       ]
     },
@@ -60,7 +66,13 @@ module.exports = (env, options) => {
       new webpack.ProvidePlugin({
         $: "jquery",
         jQuery: "jquery"
-      })
-    ]
+      }),
+      new VueLoaderPlugin()
+    ],
+    resolve: {
+      alias: {
+        'vue$': 'vue/dist/vue.esm.js'
+      }
+    }
   }
 };

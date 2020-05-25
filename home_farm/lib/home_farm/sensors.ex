@@ -17,7 +17,7 @@ defmodule HomeFarm.Sensors do
   end
 
   def get_readings_by_sensor(sensor) do
-    (from s in SensorValue, where: s.sensor_id == ^sensor.id)
+    (from s in SensorValue, where: s.sensor_id == ^sensor.id, order_by: [desc: :time], limit: 1000)
     |> Repo.all()
   end
 

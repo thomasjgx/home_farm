@@ -16,6 +16,16 @@ import "phoenix_html"
 
 import "bootstrap"
 
+import Vue from "vue"
+import VueRouter from 'vue-router/dist/vue-router.common.js'
+Vue.use(VueRouter)
+
+import Widget from "./vue/Widget.vue"
+
 import $ from 'jquery';
 window.jQuery = $;
 window.$ = $;
+
+new Vue({
+  render: h => h(Widget)
+}).$mount("#widget")
